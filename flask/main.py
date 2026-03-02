@@ -15,6 +15,11 @@ def distribution():
     user_list = ['Ваня', 'Петя', 'Саша', 'Кирилл']
     return render_template('index2.html', user_list=user_list)
 
+@app.route('/training/<prof>')
+def training(prof):
+    return render_template('index3.html', prof=prof)
+
+
 
 if __name__ == '__main__':
-    app.run(port=8081, host='127.0.0.1')
+    app.run(port=8085, host='127.0.0.1')

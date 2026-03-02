@@ -15,3 +15,8 @@ h4 {
 ul {
     list-style-type: none;
    }
+
+img {
+    display: flex;
+    justify-content: center;
+}
