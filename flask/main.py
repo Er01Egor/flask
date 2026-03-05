@@ -1,3 +1,5 @@
+import random
+
 from flask import Flask, url_for, render_template, redirect
 
 app = Flask(__name__)
@@ -32,6 +34,45 @@ def marker(val):
         return render_template('index4.1.html', proff=proffe)
     else:
         return "Неверный ввод"
+
+
+@app.route('/answer')
+@app.route('/auto_answer')
+def answ():
+    pretedents = [
+        {
+            "title": "Анкета",
+            "surname": "Starkkk",
+            "name": "Mark",
+            "education": "Выше среднего",
+            "profession": "Штурман",
+            "sex": "Муж",
+            "motivation": "Всегда мечтал об этом",
+            "ready": "Хочет домой"
+        },
+        {
+            "title": "Анкета",
+            "surname": "Ivanov",
+            "name": "Yan",
+            "education": "Основное",
+            "profession": "Инженер",
+            "sex": "Муж",
+            "motivation": "мечтал об этом",
+            "ready": " НЕ Хочет домой"
+        },
+        {
+            "title": "Анкета",
+            "surname": "Petrova",
+            "name": "Margo",
+            "education": "Выше среднего",
+            "profession": "Командир",
+            "sex": "Жен",
+            "motivation": "Всегда  Не мечтал об этом",
+            "ready": "Хочет домой"
+        }
+    ]
+    answer = random.choice(pretedents)
+    return render_template('answer.html', **answer)
 
 
 if __name__ == '__main__':

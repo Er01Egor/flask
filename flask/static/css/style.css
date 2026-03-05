@@ -11,10 +11,20 @@ h2 {
 }
 h4 {
     padding-left: 20px;
+    color: #db8484;
     }
-
+ul {
+    list-style-type: none;
+   }
 
 .cent {
     display: flex;
     justify-content: center;
+}
+p {
+    padding: 20px;
+    color: #4f4747;
+}
+h1 {
+    color: #cfeafa;
 }
