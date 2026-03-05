@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h4>Список профессий</h4>
+<div class="sws">
+    <ol>
+        {% for user in proff %}
+        <li><h6>{{ user }} {% if loop.first %} {% elif loop.last %} {%
+            endif
+            %}</h6>
+        </li>
+        {% endfor %}
+    </ol>
+</div>
+
+{% endblock %}
