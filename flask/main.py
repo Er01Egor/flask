@@ -3,8 +3,15 @@ from flask import Flask, url_for, render_template, redirect
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
-
 @app.route('/')
+def fir(name0='title'):
+    return render_template('index.html', title=name0)
+
+
+@app.route('//<name_>')
+def ind(name_='title'):
+    return render_template('index.html', title=name_)
+
 @app.route('/index/<name>')
 def index(name='title'):
     return render_template('index.html', title=name)
