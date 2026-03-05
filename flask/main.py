@@ -2,6 +2,8 @@ import random
 
 from flask import Flask, url_for, render_template, redirect
 
+from loginform import LoginForm
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
@@ -73,6 +75,24 @@ def answ():
     ]
     answer = random.choice(pretedents)
     return render_template('answer.html', **answer)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        id_avs = form.username_avs.data
+        pass_avs = form.password_avs.data
+
+        id_com = form.username_com.data
+        pass_com = form.password_com.data
+
+        print(f"ID Астронавта: {id_avs}")
+        print(f"Пароль Астронавта: {pass_avs}")
+        print(f"ID Капитана: {id_com}")
+        print(f"Пароль Капитана: {pass_com}")
+        return render_template('finish_log.html', title='Аварийный доступ')
+    return render_template('login.html', title='Аварийный доступ', form=form)
 
 
 if __name__ == '__main__':
