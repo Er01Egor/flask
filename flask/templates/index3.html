@@ -1,8 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="form-group" align="center">
+    {% if 'инженер' in prof or 'строитель' in prof%}
+    <h2>Инженерные тренажеры</h2>
+    <img src="../static/img/inger1.png">
 
-<h2>Научные симуляторы</h2>
-<div><img src="img/MARS-2-2.png"></div>
+    {% else %}
+    <h2>Научные симуляторы</h2>
+    <img src="../static/img/nauch1.png">
+    {% endif %}
+</div>
+
 
 {% endblock %}
