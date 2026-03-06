@@ -12,27 +12,15 @@ color_text {
     display: flex;
     justify-content: center;
 }
-h2 {
-    display: flex;
-    justify-content: center;
-}
 h4 {
     padding-left: 20px;
     color: #76287d;
     }
-ul {
-    list-style-type: none;
-   }
-
-.cent {
-    display: flex;
-    justify-content: center;
-}
 p {
     padding-left: 10px;
     padding-top: 10px;
     color: #4f4747;
 }
 h1 {
-    color: #64156b;
+    color: #14e08b;
 }
