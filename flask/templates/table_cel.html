@@ -3,19 +3,33 @@
 {% block content %}
 <div class="form-group" align="center">
     <h1>Оформление каюты</h1>
-    <div class="container text-center">
-        <div class="row">
-            <div class="col">
-                <h6>Цвет стен</h6>
-            </div>
-            <div class="col">
-                <h6>Эмблема</h6>
-                {% if years <= 21%}
-                <img src="{{ url_for('static', filename='img/ml1.png') }}" align="center">
+    <div class="head_color">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    <h6>Цвет стен</h6>
+                    {% if years <= 21 and sex == 'female' %}
+                    <img src="{{ url_for('static', filename='img/red_ml.png') }}" align="center">
+                    {% elif years <= 21 and sex == 'male' %}
+                    <img src="{{ url_for('static', filename='img/blue_ml.png') }}" align="center">
+                    {% elif years > 21 and sex == 'female' %}
+                    <img src="{{ url_for('static', filename='img/red_old.png') }}" align="center">
+                    {% elif years > 21 and sex == 'male' %}
+                    <img src="{{ url_for('static', filename='img/blue_old.png') }}" align="center">
 
-                {% else %}
-                <img src="{{ url_for('static', filename='img/ml2.png') }}" align="center">
-                {% endif %}
+                    {% else %}
+                    <img src="{{ url_for('static', filename='img/red_old.png') }}" align="center">
+                    {% endif %}
+                </div>
+                <div class="col">
+                    <h6>Эмблема</h6>
+                    {% if years <= 21%}
+                    <img src="{{ url_for('static', filename='img/ml1.png') }}" align="center">
+
+                    {% else %}
+                    <img src="{{ url_for('static', filename='img/ml2.png') }}" align="center">
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

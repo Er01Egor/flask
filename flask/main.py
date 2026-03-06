@@ -94,9 +94,11 @@ def login():
         return render_template('finish_log.html', title='Аварийный доступ')
     return render_template('login.html', title='Аварийный доступ', form=form)
 
-@app.route('/table/<pol>/<years>')
+
+@app.route('/table/<pol>/<int:years>')
 def table(pol, years):
-    return render_template('table_cel.html', title='table', sex=pol, years=int(years))
+    return render_template('table_cel.html', title='table', sex=pol, years=years)
+
 
 if __name__ == '__main__':
     app.run(port=8087, host='127.0.0.1')
