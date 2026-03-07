@@ -31,3 +31,12 @@ img {
     height: auto;
     object-fit: contain;
 }
+
+.carousel-control-prev, .carousel-control-next {
+    background: none;
+    border: none;
+}
+.galeryy {
+    border: 3px solid black;
+    border-radius: 10px;
+}

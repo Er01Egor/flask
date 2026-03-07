@@ -1,7 +1,10 @@
+import os
 import random
 
-from flask import Flask, url_for, render_template, redirect
+from flask import Flask, url_for, render_template, redirect, request
+from werkzeug.utils import secure_filename
 
+from galeryform import UploadForm
 from loginform import LoginForm
 
 app = Flask(__name__)
@@ -98,6 +101,18 @@ def login():
 @app.route('/table/<pol>/<int:years>')
 def table(pol, years):
     return render_template('table_cel.html', title='table', sex=pol, years=years)
+
+
+@app.route('/galery', methods=['GET', 'POST'])
+def galery():
+    form = UploadForm()
+    img_name = request.args.get('data_img')
+    if form.validate_on_submit():
+        file = form.file.data
+        filename = secure_filename(file.filename)
+        file.save(os.path.join('static/img', filename))
+        return redirect(url_for('galery', data_img=filename))
+    return render_template('galery.html', title='Красная планета', form=form, data_img=img_name)
 
 
 if __name__ == '__main__':
