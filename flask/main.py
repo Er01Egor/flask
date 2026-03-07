@@ -1,3 +1,4 @@
+import json
 import os
 import random
 
@@ -113,6 +114,15 @@ def galery():
         file.save(os.path.join('static/img', filename))
         return redirect(url_for('galery', data_img=filename))
     return render_template('galery.html', title='Красная планета', form=form, data_img=img_name)
+
+
+@app.route('/member')
+def member():
+    with open('templates/members.json', 'r', encoding='utf-8') as f:
+        data = json.load(f)
+
+    answer = random.choice(data)
+    return render_template('card.html', title='card', member_card=answer)
 
 
 if __name__ == '__main__':

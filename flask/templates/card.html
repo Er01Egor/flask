@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-group" align="center">
+    <h3>{{member_card['name']}}</h3>
+    <img src="{{ url_for('static', filename='img/' + member_card['photo']) }}">
+    <h5>{{member_card['profession']}}</h5>
+</div>
+
+
+{% endblock %}
