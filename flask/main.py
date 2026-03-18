@@ -19,6 +19,28 @@ def main():
     db_sess = db_session.create_session()
     db_sess.add(user)
     db_sess.commit()
+    user = User()
+    user.surname = "Scott2"
+    user.name = "Ridley2"
+    user.age = 35
+    user.position = "captain2"
+    user.speciality = "research engineer2"
+    user.address = "module_2"
+    user.email = "scott_chief2@mars.org"
+    db_sess = db_session.create_session()
+    db_sess.add(user)
+    db_sess.commit()
+    user = User()
+    user.surname = "Scott3"
+    user.name = "Ridley3"
+    user.age = 27
+    user.position = "captain3"
+    user.speciality = "research engineer3"
+    user.address = "module_3"
+    user.email = "scott_chief3@mars.org"
+    db_sess = db_session.create_session()
+    db_sess.add(user)
+    db_sess.commit()
     app.run()
 
 
