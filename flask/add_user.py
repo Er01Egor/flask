@@ -4,7 +4,7 @@ from flask import Flask
 from data import db_session
 from data.users import User
 
-db_session.global_init("db/mars_explorer2.db")
+db_session.global_init("db/mars_explorer.db")
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
@@ -18,7 +18,7 @@ data = [{'name': 'Ridley',
         {'name': 'Sam',
          'age': 19,
          'surname': 'Smith',
-         'position': "sailor",
+         'position': "chief",
          'email': 'sam_durak@mars.org',
          'speciality': 'navigator',
          'address': 'module_1'},
@@ -32,7 +32,7 @@ data = [{'name': 'Ridley',
         {'name': 'Jimmi',
          'age': 17,
          'surname': 'Brown',
-         'position': "sailor",
+         'position': "chief",
          'email': 'brown_chief@mars.org',
          'speciality': 'sailor',
          'address': 'module_4'}

@@ -9,7 +9,7 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
 def add_jobs():
-    db_session.global_init("db/blogs3.db")
+    db_session.global_init("db/blogs.db")
     jobs = Jobs()
     jobs.team_leader = 1
     jobs.job = "deployment of residential modules 1 and 2"
