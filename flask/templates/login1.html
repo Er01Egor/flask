@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="site_body">
+    <div class="head">
+        <img src="../static/img/mars_logo.png">
+        <h1>Аварийный доступ</h1>
+    </div>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.name_avs.label }}<br>
+            {{ form.username_avs(class="form-control") }}<br>
+            {% for error in form.username_avs.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endfor %}
+        </p>
+        <p>
+            {{ form.password_avs.label }}<br>
+            {{ form.password_avs(class="form-control", type="password") }}<br>
+            {% for error in form.password_avs.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endfor %}
+        </p>
+        <p>
+            {{ form.surname_com.label }}<br>
+            {{ form.username_com(class="form-control") }}<br>
+            {% for error in form.username_com.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endfor %}
+        </p>
+        <p>
+            {{ form.speciality.label }}<br>
+            {{ form.password_avs(class="form-control", type="password") }}<br>
+            {% for error in form.password_avs.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endfor %}
+        </p>
+
+        <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    </form>
+</div>
+{% endblock %}

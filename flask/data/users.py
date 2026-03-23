@@ -1,7 +1,7 @@
 import datetime
 import sqlalchemy
 from .db_session import SqlAlchemyBase
-
+from flask_login import UserMixin
 
 class User(SqlAlchemyBase):
     __tablename__ = 'users'
@@ -22,3 +22,4 @@ class User(SqlAlchemyBase):
 
     def __repr__(self):
         return f"<Colonist> {self.id} {self.surname} {self.name}"
+

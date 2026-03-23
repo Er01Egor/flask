@@ -4,6 +4,7 @@ from wtforms.fields.numeric import IntegerField
 from wtforms.validators import DataRequired
 from werkzeug.security import generate_password_hash, check_password_hash
 
+
 class RegisterForm(FlaskForm):
     email = EmailField('login / email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -16,8 +17,10 @@ class RegisterForm(FlaskForm):
     address = StringField('Address', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
+
 def set_password(self, password):
     self.hashed_password = generate_password_hash(password)
+
 
 def check_password(self, password):
     return check_password_hash(self.hashed_password, password)
