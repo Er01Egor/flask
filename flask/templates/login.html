@@ -9,7 +9,7 @@
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
-            {{ form.username_avs.label }}<br>
+            {{ form.name_avs.label }}<br>
             {{ form.username_avs(class="form-control") }}<br>
             {% for error in form.username_avs.errors %}
         <div class="alert alert-danger" role="alert">
@@ -27,7 +27,7 @@
         {% endfor %}
         </p>
         <p>
-            {{ form.username_com.label }}<br>
+            {{ form.surname_com.label }}<br>
             {{ form.username_com(class="form-control") }}<br>
             {% for error in form.username_com.errors %}
         <div class="alert alert-danger" role="alert">
@@ -36,9 +36,9 @@
         {% endfor %}
         </p>
         <p>
-            {{ form.password_com.label }}<br>
-            {{ form.password_com(class="form-control", type="password") }}<br>
-            {% for error in form.password_com.errors %}
+            {{ form.speciality.label }}<br>
+            {{ form.password_avs(class="form-control", type="password") }}<br>
+            {% for error in form.password_avs.errors %}
         <div class="alert alert-danger" role="alert">
             {{ error }}
         </div>

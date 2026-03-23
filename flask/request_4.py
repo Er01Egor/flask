@@ -1,4 +1,4 @@
-"""
+
 from flask import Flask
 from data import db_session
 from data.users import User
@@ -12,4 +12,3 @@ db_sess = db_session.create_session()
 for user in db_sess.query(User).all():
     if user.position == 'chief' or user.position == 'middle':
         print(user, user.position, user.speciality)
-"""

@@ -1,13 +1,10 @@
-from flask import Flask
-from data import db_session
-from data.users import User
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
-# db = "mars_explorer.sqlite"
-db = input().split('.')
-db_session.global_init("db/" + db[0] + ".db")
-db_sess = db_session.create_session()
+if False:
+    name_db = 'db/mars_explorer.db'
+else:
+    name_db = input()
+global_init(name_db)
+db_sess = create_session()
 for user in db_sess.query(User).all():
-    if user.age < 18:
-        print(user)
+    if user.address == 'module_1':
+        if user.speciality != 'engineer' or user.position != 'engineer':
+            print(user.id)
