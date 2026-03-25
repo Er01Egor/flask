@@ -1,40 +1,26 @@
-
-import json
 import os
-import random
+from random import random
 
-from flask import Flask, url_for, render_template, redirect, request
+from flask import Flask, url_for, request, render_template, redirect, abort
 from werkzeug.utils import secure_filename
 
-from flask import db_session
-from forms.user import RegisterForm
+from data import db_session
+from data.users import User
 from galeryform import UploadForm
-from loginform import LoginForm
+from forms.user import RegisterForm
 from forms.login import LoginForm
-from forms.login import login_user
+from flask_login import login_user
+import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        db_sess = db_session.create_session()
-        user = db_sess.query(User).filter(User.email == form.email.data).first()
-        if user and user.check_password(form.password.data):
-            login_user(user, remember=form.remember_me.data)
-            return redirect("/")
-        return render_template('login.html',
-                               message="Неправильный логин или пароль",
-                               form=form)
-    return render_template('login.html', title='Авторизация', form=form)
-
-@app.route('/<name>')
-@app.route('/index/<name>')
+@app.route('/')
+@app.route('/index')
 def index(name='title'):
-    return render_template('index.html', title=name)
+    return render_template('work_log.html', title=name)
+
 
 @app.route('/suse')
 def suse():
@@ -51,7 +37,7 @@ def reqister():
                                    message="Пароли не совпадают")
         db_sess = db_session.create_session()
         if db_sess.query(User).filter(User.email == form.email.data).first():
-            return render_template('register.html', title='Регистрация',
+            return render_template('login.html', title='Регистрация',
                                    form=form,
                                    message="Такой пользователь уже есть")
         user = User(
@@ -68,7 +54,23 @@ def reqister():
         db_sess.add(user)
         db_sess.commit()
         return redirect('/login')
-    return render_template('register.html', title='Регистрация', form=form)
+    return render_template('login1.html', title='Регистрация', form=form)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        user = db_sess.query(User).filter(User.email == form.email.data).first()
+        if user and user.check_password(form.password.data):
+            login_user(user, remember=form.remember_me.data)
+            return redirect("/")
+        return render_template('login.html',
+                               message="Неправильный логин или пароль",
+                               form=form)
+    return render_template('login.html', title='Авторизация', form=form)
+
 
 @app.route("/distribution")
 def distribution():
@@ -178,4 +180,4 @@ def member():
 
 
 if __name__ == '__main__':
-    app.run(port=8087, host='127.0.0.1')
+    app.run(port=5050, host='127.0.0.1')

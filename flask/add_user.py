@@ -1,13 +1,7 @@
-import datetime
-
-from flask import Flask
-from data import db_session
 from data.users import User
+from data import db_session
 
 db_session.global_init("db/mars_explorer.db")
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
-
 data = [{'name': 'Ridley',
          'age': 21,
          'surname': 'Scott',
@@ -18,10 +12,10 @@ data = [{'name': 'Ridley',
         {'name': 'Sam',
          'age': 19,
          'surname': 'Smith',
-         'position': "chief",
+         'position': "sailor",
          'email': 'sam_durak@mars.org',
          'speciality': 'navigator',
-         'address': 'module_1'},
+         'address': 'module_2'},
         {'name': 'Dan',
          'age': 18,
          'surname': 'Williams',
@@ -32,15 +26,13 @@ data = [{'name': 'Ridley',
         {'name': 'Jimmi',
          'age': 17,
          'surname': 'Brown',
-         'position': "chief",
+         'position': "sailor",
          'email': 'brown_chief@mars.org',
          'speciality': 'sailor',
          'address': 'module_4'}
         ]
 
-
-
-def add_users():
+def insert_users():
     for elem in data:
         user = User()
         user.name = elem['name']
@@ -54,6 +46,5 @@ def add_users():
         db_sess.add(user)
         db_sess.commit()
 
-
 if __name__ == '__main__':
-    add_users()
+    insert_users()
