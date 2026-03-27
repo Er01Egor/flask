@@ -12,9 +12,17 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-light bg-info p-3">
-        <h1>Миссия колонизация марса</h1>
-        <a class="navbar-brand" href="#">Mars one</a>
+     <nav class="navbar navbar-light bg-info p-3">
+        <h1>Миссия Колонизация Марса</h1>
+        <a class="navbar-brand" href="#">Mars One</a>
+        {% if current_user.is_authenticated %}
+            <a class="navbar-brand" href="/logout">{{ current_user.name }} {{ current_user.surname }}</a>
+        {% else %}
+            <p>
+                <a class="btn btn-primary " href="/register">Зарегистрироваться</a>
+                <a class="btn btn-success" href="/login">Войти</a>
+            </p>
+        {% endif %}
     </nav>
 </header>
 <h4>
