@@ -10,10 +10,24 @@ from galeryform import UploadForm
 from forms.user import RegisterForm
 from forms.login import LoginForm
 from flask_login import login_user
+from flask_login import LoginManager, login_user
+from flask_login import login_required, logout_user, current_user
+import json
+from flask import make_response
+
 import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    db_sess = db_session.create_session()
+    return db_sess.query(User).get(user_id)
 
 
 @app.route('/')
@@ -37,16 +51,16 @@ def reqister():
                                    message="Пароли не совпадают")
         db_sess = db_session.create_session()
         if db_sess.query(User).filter(User.email == form.email.data).first():
-            return render_template('login.html', title='Регистрация',
+            return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Такой пользователь уже есть")
         user = User(
             name=form.name.data,
-            surname=form.name.data,
-            age=form.name.data,
-            position=form.name.data,
-            speciality=form.name.data,
-            address=form.name.data,
+            surname=form.surname.data,
+            age=form.age.data,
+            position=form.position.data,
+            speciality=form.speciality.data,
+            address=form.address.data,
             email=form.email.data,
 
         )
@@ -54,7 +68,7 @@ def reqister():
         db_sess.add(user)
         db_sess.commit()
         return redirect('/login')
-    return render_template('login1.html', title='Регистрация', form=form)
+    return render_template('register.html', title='Регистрация', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -180,4 +194,5 @@ def member():
 
 
 if __name__ == '__main__':
-    app.run(port=5060, host='127.0.0.1')
+    db_session.global_init("db/blogs.db")
+    app.run(port=8000, host='127.0.0.1')
