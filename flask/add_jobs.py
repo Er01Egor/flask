@@ -7,19 +7,20 @@ data = [{'team_leader': 1,
          'job': 'deployment of residential modules 1 and 2',
          'work_size': 15,
          'collaborators': '2, 3',
-         'is_finished': False,},
+         'is_finished': False, },
         {'team_leader': 2,
-         'job': 'deployment of residential 1 and 2',
+         'job': 'deployment of residential modules 1 and 2',
          'work_size': 30,
          'collaborators': '1, 2',
          'is_finished': False, }
-        ,
+    ,
         {'team_leader': 3,
-         'job': 'deployment of residential modules',
+         'job': 'deployment of residential modules 1 and 2',
          'work_size': 14,
          'collaborators': '4, 1',
-         'is_finished': True }
+         'is_finished': True}
         ]
+
 
 def insert_jobs():
     for elem in data:
@@ -32,6 +33,7 @@ def insert_jobs():
         db_sess = db_session.create_session()
         db_sess.add(job)
         db_sess.commit()
+
 
 if __name__ == '__main__':
     insert_jobs()

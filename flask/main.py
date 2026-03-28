@@ -4,7 +4,7 @@ from random import random
 from flask import Flask, url_for, request, render_template, redirect, abort
 from werkzeug.utils import secure_filename
 
-from data import db_session
+from data import db_session, jobs_api
 from data.users import User
 from galeryform import UploadForm
 from forms.user import RegisterForm
@@ -15,13 +15,17 @@ from flask_login import login_required, logout_user, current_user
 import json
 from flask import make_response
 
-import json
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+
+def all_work():
+    db_session.global_init("db/mars_explorer.db")
+    app.register_blueprint(jobs_api.blueprint)
+    app.run(port=8000, host='127.0.0.1')
 
 
 @login_manager.user_loader
@@ -194,5 +198,4 @@ def member():
 
 
 if __name__ == '__main__':
-    db_session.global_init("db/blogs.db")
-    app.run(port=8000, host='127.0.0.1')
+    main()
