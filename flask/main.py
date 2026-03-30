@@ -14,10 +14,11 @@ from flask_login import LoginManager, login_user
 from flask_login import login_required, logout_user, current_user
 import json
 from flask import make_response
+from flask_restful import reqparse, abort, Api, Resource
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
-
+api = Api(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 

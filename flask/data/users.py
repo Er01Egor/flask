@@ -23,9 +23,12 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     modified_date = sqlalchemy.Column(sqlalchemy.DateTime,
                                       default=datetime.datetime.now)
+    jobs = orm.relation("Jobs", black_populates="user")
+
+    # departaments = orm.relation("Departamen", black_populates="user")
 
     def __repr__(self):
-        return f'"<Марсианин>" {self.id} - фамилия  {self.surname} имя: {self.name}'
+        return f"Colonist {self.id} {self.surname} {self.name}"
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)
