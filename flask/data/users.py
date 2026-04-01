@@ -23,7 +23,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     modified_date = sqlalchemy.Column(sqlalchemy.DateTime,
                                       default=datetime.datetime.now)
-    jobs = orm.relation("Jobs", back_populates="user")
+    jobs = orm.relationship("Jobs", back_populates="user")
 
     # departaments = orm.relation("Departamen", back_populates="user")
 

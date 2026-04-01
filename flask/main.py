@@ -6,9 +6,12 @@ from werkzeug.utils import secure_filename
 
 from data import db_session, jobs_api
 from data.users import User
+from data.jobs import Jobs
 from galeryform import UploadForm
 from forms.user import RegisterForm
 from forms.login import LoginForm
+from data.category import Category
+from forms.jobs_form import NewsJob
 from flask_login import login_user
 from flask_login import LoginManager, login_user
 from flask_login import login_required, logout_user, current_user
@@ -89,6 +92,29 @@ def login():
                                message="Неправильный логин или пароль",
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
+
+
+@app.route('/addjob', methods=['GET', 'POST'])
+@login_required
+def add_job():
+    form = NewsJob()
+    db_sess = db_session.create_session()
+    categories = db_sess.query(Category).all()
+    form.categories.choices = [(c.id, c.name) for c in categories]
+    if form.validate_on_submit():
+        jobs = Jobs()
+        jobs.job = form.title.data
+        jobs.team_leader = form.id.data
+        jobs.work_size = form.work_size.data
+        jobs.collaborators = form.collaborators.data
+        jobs.is_finished = form.is_job_finished.data
+        category = db_sess.query(Category).filter(Category.id == form.categories.data).first()
+        jobs.categories = [category]
+        db_sess.add(jobs)
+        db_sess.commit()
+        return redirect('/')
+    return render_template('jobs_add.html', title='Adding a Job',
+                           form=form)
 
 
 @app.route("/distribution")
