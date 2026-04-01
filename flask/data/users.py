@@ -25,7 +25,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
                                       default=datetime.datetime.now)
     jobs = orm.relation("Jobs", back_populates="user")
 
-    # departaments = orm.relation("Departamen", black_populates="user")
+    # departaments = orm.relation("Departamen", back_populates="user")
 
     def __repr__(self):
         return f"Colonist {self.id} {self.surname} {self.name}"
