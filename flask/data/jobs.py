@@ -20,7 +20,7 @@ class Jobs(SqlAlchemyBase, UserMixin, SerializerMixin):
                                  default=datetime.datetime.now)
     is_finished = sqlalchemy.Column(sqlalchemy.Boolean, nullable=True)
 
-    category = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users_id"))
+    category = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("category.id"))
 
     user = orm.relationship("User")
 

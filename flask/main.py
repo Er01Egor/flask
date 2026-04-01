@@ -7,10 +7,12 @@ from werkzeug.utils import secure_filename
 from data import db_session, jobs_api
 from data.users import User
 from data.jobs import Jobs
+from data.news import News
 from galeryform import UploadForm
 from forms.user import RegisterForm
 from forms.login import LoginForm
 from data.category import Category
+from data.departments import Department
 from forms.jobs_form import NewsJob
 from flask_login import login_user
 from flask_login import LoginManager, login_user
@@ -35,14 +37,38 @@ def main():
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
-    return db_sess.query(User).get(user_id)
+    return db_sess.get(User, user_id)
 
 
 @app.route('/')
 @app.route('/index')
-def index(name='title'):
-    return render_template('work_log.html', title=name)
+def index():
+    db_sess = db_session.create_session()
+    jobs = db_sess.query(Jobs).all()
+    users = db_sess.query(User).all()
+    names = {}
+    for user in users:
+        names[user.id] = f'{user.surname} {user.name}'
+    param = {}
+    param['title'] = 'main'
+    if current_user.is_authenticated:
+        news = db_sess.query(News).filter(
+            (News.user == current_user) | (News.is_private != True))
+    else:
+        news = db_sess.query(News).filter(News.is_private != True)
+    return render_template('index.html', jobs=jobs, names=names, **param)
 
+@app.route('/departments')
+def departments():
+    db_sess = db_session.create_session()
+    departments = db_sess.query(Department).all()
+    users = db_sess.query(User).all()
+    names = {}
+    for user in users:
+        names[user.id] = f'{user.surname} {user.name}'
+    param = {}
+    param['title'] = 'main'
+    return render_template('departments.html', departments=departments, names=names, **param)
 
 @app.route('/suse')
 def suse():
