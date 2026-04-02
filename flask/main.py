@@ -14,7 +14,6 @@ from forms.login import LoginForm
 from data.category import Category
 from data.departments import Department
 from forms.jobs_form import NewsJob
-from flask_login import login_user
 from flask_login import LoginManager, login_user
 from flask_login import login_required, logout_user, current_user
 import json
@@ -58,6 +57,7 @@ def index():
         news = db_sess.query(News).filter(News.is_private != True)
     return render_template('index.html', jobs=jobs, names=names, **param)
 
+
 @app.route('/departments')
 def departments():
     db_sess = db_session.create_session()
@@ -69,6 +69,7 @@ def departments():
     param = {}
     param['title'] = 'main'
     return render_template('departments.html', departments=departments, names=names, **param)
+
 
 @app.route('/suse')
 def suse():
