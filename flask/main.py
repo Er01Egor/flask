@@ -1,6 +1,6 @@
 import os
 from random import random
-
+from waitress import serve
 from flask import Flask, url_for, request, render_template, redirect, abort
 from werkzeug.utils import secure_filename
 
@@ -25,12 +25,6 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 api = Api(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
-
-
-def main():
-    db_session.global_init("db/mars_explorer.db")
-    app.register_blueprint(jobs_api.blueprint)
-    app.run(port=8000, host='127.0.0.1')
 
 
 @login_manager.user_loader
@@ -252,4 +246,7 @@ def member():
 
 
 if __name__ == '__main__':
-    main()
+    db_session.global_init("db/mars_explorer.db")
+    app.register_blueprint(jobs_api.blueprint)
+    # app.run(port=8080, host='127.0.0.1')
+    serve(app, host='127.0.0.1', port=8080)
